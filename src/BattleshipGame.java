@@ -1,43 +1,62 @@
 import Models.Board;
 import Models.BotPlayer;
 import Models.Player;
+import Models.Utils.Converter;
 
 import java.util.*;
 
 public class BattleshipGame {
     public static void main(String[] args) {
+        Converter converter=new Converter();
     BotPlayer botPlayer=new BotPlayer("bot");
-        botPlayer.
-        //board.printBoard();
-        Player player = new Player("player1");
+    Player player=new Player("Player1");
+    botPlayer.setBoard(new Board());
+    player.setBoard(new Board());
+    player.getBoard().autoPlaceShips(player.getBoard(),player.getShips());
+    botPlayer.getBoard().autoPlaceShips(botPlayer.getBoard(),botPlayer.getShips());
+        botPlayer.setOpponentBoard(player.getBoard());
+        botPlayer.setOpponentShips(player.getShips());
+        player.setOpponentBoard(botPlayer.getBoard());
+        player.setOpponentShips(botPlayer.getShips());
+     printGame(player.getBoard(),botPlayer.getBoard());
+     Scanner in=new Scanner(System.in);
+     String x;
+     String y;
 
-        // player.placeShipsManual();
-         player.autoPlaceShips();
-      //  Player player2 = new Player("player2");
 
-       Scanner in = new Scanner(System.in);
-         // player.autoPlaceShips();
-      //  player2.autoPlaceShips();
-        player.setOpponentBoard(player2.getBoard());
-       // player2.setOpponentBoard(player.getBoard());
-        //System.out.println("До стопа");
-        //  String stop=in.nextLine();
-        printGame(player.getBoard(), player2.getBoard());
-        String stop="g";
+             //  Random random=new Random();
 
-        String x;
-        String y;
-        while(!stop.equals("Стоп")){
-           System.out.println("X:");
-            x=in.nextLine();
-            System.out.println("Y:");
-            y=in.nextLine();
-            player.attack(x,y,player2.getShips());
-            printGame(player.getBoard(),player2.getBoard());
+while (true){
+                     int j = in.nextInt();
+                     int i=in.nextInt();
 
-            }
 
-       printGame(player.getBoard(),player2.getBoard());
+                     botPlayer.botAttack(j, i);
+
+                     printGame(player.getBoard(), botPlayer.getBoard());
+                }
+             }
+
+
+
+
+
+
+
+
+//        String x;
+//        String y;
+//        while(!stop.equals("Стоп")){
+//           System.out.println("X:");
+//            x=in.nextLine();
+//            System.out.println("Y:");
+//            y=in.nextLine();
+//            player.attack(x,y,player2.getShips());
+//            printGame(player.getBoard(),player2.getBoard());
+//
+//            }
+//
+//       printGame(player.getBoard(),player2.getBoard());
     //            allShipsDestroyed(player.getBoard(),player2.getBoard());
 //            }
 
@@ -45,7 +64,7 @@ public class BattleshipGame {
 
 
 
-    }
+
 public static void allShipsDestroyed(Board playerBoard,Board opponentBoard){
         int amountOfCellShips=0;
         for(int i=0;i<16;i++){

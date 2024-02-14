@@ -73,7 +73,6 @@ public class Ship {
         return true; // Все клетки корабля поражены
     }
     public boolean containsPoint(int x, int y) {
-        int i=0; //////////////
         Converter converter = new Converter();
         int startXNumber = converter.convertLetterToNumber(startX);
         int startYNumber = Integer.parseInt(startY);
